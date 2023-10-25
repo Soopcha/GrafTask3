@@ -1,6 +1,6 @@
 package math.theMatrix;
 
-import math.theVector.Vector4D;
+import math.theVector.Vector4;
 
 public class Matrix4x4 {
     private double[][] matrix;
@@ -13,6 +13,14 @@ public class Matrix4x4 {
         if (matrix.length != 4 || matrix[0].length != 4) {
             throw new IllegalArgumentException("Invalid matrix dimensions");
         }
+        this.matrix = matrix;
+    }
+
+    public double[][] getMatrix() {
+        return matrix;
+    }
+
+    public void setMatrix(double[][] matrix) {
         this.matrix = matrix;
     }
 
@@ -46,7 +54,7 @@ public class Matrix4x4 {
         return new Matrix4x4(result);
     }
 
-    public Vector4D multiply(Vector4D vector) {
+    public Vector4 multiply(Vector4 vector) {
         double[] result = new double[4];
         for (int i = 0; i < 4; i++) {
             result[i] = this.matrix[i][0] * vector.getX() +
@@ -54,7 +62,7 @@ public class Matrix4x4 {
                     this.matrix[i][2] * vector.getZ() +
                     this.matrix[i][3] * vector.getW();
         }
-        return new Vector4D(result[0], result[1], result[2], result[3]);
+        return new Vector4(result[0], result[1], result[2], result[3]);
     }
 
     public Matrix4x4 multiply(Matrix4x4 other) {
